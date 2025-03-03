@@ -1,0 +1,21 @@
+{
+    "name": "media-store-net/wp-mvc-core",
+    "description": "A small MVC framework for Wordpress plugins and themes.",
+    "license": "MIT",
+    "keywords": ["wordpress","mvc","light"],
+    "authors": [
+        {
+            "name": "Artur Voll",
+            "email": "kontakt@media-store.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "MediaStoreNet\\MVC_Core\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}

@@ -30,7 +30,7 @@ trait MetaTrait
 				$value = $value[0];
 
 				$this->meta[$key] = is_string( $value )
-					? ( preg_match( '/_wp_/', $key )
+					? ( preg_match( '/_wp_/', $key ) || !$this->is_json( $value )
 						? $value
 						: json_decode( $value )
 					)
@@ -122,4 +122,9 @@ trait MetaTrait
 			$this->save_meta( $key, $value, false );
 		}
 	}
+
+    public function is_json($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
 }

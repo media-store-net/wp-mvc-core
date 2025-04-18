@@ -22,7 +22,7 @@ class Request
 	{
 		global $wp_query;
 
-		$value = null;
+		$value = '';
 
 		// Check if it exists in wp_query
 		if ( array_key_exists( $key, $wp_query->query_vars ) ) {
@@ -47,7 +47,7 @@ class Request
 
 		if ( ! is_array( $value ) ) $value = trim( $value );
 
-		return $value == null
+		return empty($value)
 			? $default
 			: ( is_array( $value )
 				? $value

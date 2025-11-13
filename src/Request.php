@@ -45,7 +45,7 @@ class Request
 
 		}
 
-		if ( ! is_array( $value ) ) $value = trim( $value );
+        if ( ! is_array( $value ) ) $value = is_null($value) ? $value : trim( $value );
 
 		return empty($value)
 			? $default

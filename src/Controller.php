@@ -26,10 +26,31 @@ abstract class Controller
 	 */
 	public function __construct( $view )
 	{
-        if(!function_exists('get_userdata')){
-            require_once ABSPATH . '/wp-includes/pluggable.php';
+        $user_id = 0;
+
+        if (!defined('ABSPATH')) {
+            require_once dirname(__FILE__, 5) . '/wp-load.php';
         }
-		$this->user = \get_userdata( get_current_user_id() );
-		$this->view = $view;
+
+        if (is_multisite()) {
+            /**
+             * @since 2.5.0
+             */
+            if (! defined('AUTH_COOKIE') || ! defined('SECURE_AUTH_COOKIE')) {
+                require_once ABSPATH . '/wp-includes/default-constants.php';
+                wp_cookie_constants();
+            }
+        }
+
+        require_once ABSPATH . '/wp-includes/user.php';
+        require_once ABSPATH . '/wp-includes/pluggable.php';
+
+        $user_id = \get_current_user_id();
+
+        if ($user_id) {
+            $this->user = \get_userdata($user_id);
+        }
+
+        $this->view = $view;
 	}
 }
